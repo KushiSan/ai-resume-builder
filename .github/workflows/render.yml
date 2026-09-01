@@ -3,7 +3,7 @@ name: Render Fiber Spinning Video
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # Allows manual triggering from the Actions tab
+  workflow_dispatch:
 
 jobs:
   render:
@@ -18,19 +18,19 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install System Dependencies (FFmpeg)
+    - name: Install System & Graphics Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y ffmpeg
+        sudo apt-get install -y ffmpeg libcairo2-dev libpango1.0-dev pkg-config python3-dev
 
     - name: Install Python Packages
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install --upgrade pip setuptools wheel
         pip install manim
 
     - name: Render Animation Scene
       run: |
-        manim -ql fiber_spinning.py Scene2MeltSpinning
+        manim -ql --disable_caching fiber_spinning.py Scene2MeltSpinning
 
     - name: Upload Rendered Video
       uses: actions/upload-artifact@v4
