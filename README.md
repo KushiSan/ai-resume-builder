@@ -1,2 +1,2 @@
-# ai-resume-builder
+# resume-builder
 A study for me
