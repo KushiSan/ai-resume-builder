@@ -242,5 +242,5 @@ class Scene7ComparativeSummary(Scene):
 
         self.play(Create(panels, run_time=3))
 
-manim -pqh fiber_spinning.py Scene1Intro Scene2MeltSpinning Scene3SolutionOverview Scene4WetSpinning Scene5DrySpinning Scene6DryJetWetSpinning Scene7ComparativeSummary
+        self.play(Create(panels, run_time=3))
         self.wait(2)
