@@ -28,9 +28,15 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         pip install manim
 
-    - name: Render Animation Scene
+    - name: Render All Animation Scenes
       run: |
-        manim -ql --disable_caching fiber_spinning.py Scene2MeltSpinning
+        manim -ql --disable_caching fiber_spinning.py Scene1Intro Scene2MeltSpinning Scene3SolutionOverview Scene4WetSpinning Scene5DrySpinning Scene6DryJetWetSpinning Scene7ComparativeSummary
+
+    - name: Upload All Rendered Videos
+      uses: actions/upload-artifact@v4
+      with:
+        name: fiber-spinning-videos
+        path: media/**/*.mp4
 
     - name: Upload Rendered Video
       uses: actions/upload-artifact@v4
