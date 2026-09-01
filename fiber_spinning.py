@@ -1,4 +1,3 @@
-pip install manim
 from manim import *
 
 # Define consistent color palette for industrial components
