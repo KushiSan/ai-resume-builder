@@ -32,14 +32,16 @@ jobs:
       run: |
         manim -ql --disable_caching fiber_spinning.py Scene1Intro Scene2MeltSpinning Scene3SolutionOverview Scene4WetSpinning Scene5DrySpinning Scene6DryJetWetSpinning Scene7ComparativeSummary
 
-    - name: Upload All Rendered Videos
-      uses: actions/upload-artifact@v4
-      with:
-        name: fiber-spinning-videos
-        path: media/**/*.mp4
+    - name: Combine Scenes into Single Full Video
+      run: |
+        # Find all generated mp4 clips and merge them in sequence
+        find media/ -name "*.mp4" | sort > concat_list.txt
+        sed -i "s/^/file '/;s/$/'/" concat_list.txt
+        ffmpeg -f concat -safe 0 -i concat_list.txt -c copy final_fiber_spinning_animation.mp4
 
-    - name: Upload Rendered Video
+    - name: Upload Final Combined Video Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: melt-spinning-video
-        path: media/videos/fiber_spinning/480p15/Scene2MeltSpinning.mp4
+        name: final-fiber-spinning-animation
+        path: final_fiber_spinning_animation.mp4
+      
