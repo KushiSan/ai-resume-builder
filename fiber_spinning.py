@@ -239,6 +239,5 @@ class Scene7ComparativeSummary(Scene):
             p[1].move_to(p[0].get_center())
 
         panels.arrange_in_grid(rows=2, cols=2, buff=0.4).move_to(DOWN * 0.3)
-
         self.play(Create(panels, run_time=3))
         self.wait(2)
